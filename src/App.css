@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("./assets/stadium.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: sans-serif;
+}
+
+#app-container {
+  background: rgba(255, 255, 255, 0.65);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  max-width: 650px;
+  margin: 60px auto;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.team-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  opacity: 1;
+}
+
+.selector-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* ⚡️ glowing red lightning */
+.lightning-glow {
+  font-size: 70px;
+  animation: redGlow 1.4s infinite ease-in-out;
+  filter: drop-shadow(0 0 10px red) drop-shadow(0 0 20px red);
+}
+
+@keyframes redGlow {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px red);
+  }
+  50% {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 20px red);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px red);
+  }
+}
+
+/* wrapper controls horizontal movement (no clipping) */
+.ball-wrap {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  width: 280px;      
+  height: auto;
+  pointer-events: none;
+  transform: translateX(-50%); 
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: wrapMove 4s linear infinite alternate;
+  z-index: -1;
+}
+
+/* the image inside rotates independently (only rotation uses transform) */
+#football {
+  width: 140px;
+  height: auto;
+  display: block;
+  transform-origin: 50% 50%;
+  animation: spinBall 1s linear infinite;
+  pointer-events: none;
+}
+
+
+@keyframes wrapMove {
+  from { transform: translateX(calc(-50% - 45vw)); } /* far left */
+  to   { transform: translateX(calc(-50% + 45vw)); } /* far right */
+}
+
+/* spin */
+@keyframes spinBall {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
